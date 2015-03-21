@@ -1,0 +1,57 @@
+{
+  "name": "react-layer",
+  "version": "1.0.0",
+  "description": "Simple abstraction for creating and managing new render trees",
+  "author": {
+    "name": "Jason Quense",
+    "email": "monastic.panic@gmail.com"
+  },
+  "main": "lib/index.js",
+  "repository": "jquense/react-layer",
+  "license": "MIT",
+  "keywords": [
+    "react-layer",
+    "react-component",
+    "react-component",
+    "layer",
+    "react",
+    "portal",
+    "container"
+  ],
+  "scripts": {
+    "test": "karma start --single-run"
+  },
+  "peerDependencies": {
+    "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "babel": "^4.7.2",
+    "babel-loader": "^4.0.0",
+    "chai": "^1.10.0",
+    "chai-as-promised": "^4.1.1",
+    "css-loader": "^0.9.1",
+    "dom-helpers": "^1.2.1",
+    "gulp": "^3.8.10",
+    "gulp-babel-helpers": "^1.1.2",
+    "gulp-less": "^2.0.1",
+    "gulp-plumber": "^0.6.6",
+    "gulp-rename": "^1.2.0",
+    "imports-loader": "^0.6.3",
+    "karma": "~0.12.23",
+    "karma-mocha": "~0.1.9",
+    "karma-mocha-reporter": "^0.3.1",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "karma-sourcemap-loader": "^0.3.2",
+    "karma-webpack": "~1.2.2",
+    "less-loader": "^2.0.0",
+    "mocha": "~1.21.4",
+    "phantomjs": "~1.9.10",
+    "react": "^0.12.2",
+    "react-hot-loader": "^1.1.7",
+    "rimraf": "^2.2.8",
+    "sinon-chai": "^2.6.0",
+    "style-loader": "^0.8.3",
+    "webpack": "^1.4.15",
+    "webpack-dev-server": "^1.7.0"
+  }
+}
