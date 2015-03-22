@@ -12,11 +12,11 @@ npm i -S react-layer
 
 A Layer is a simple class that manages the mounting and unmounting of a ReactElements to a specific container element. This is helpful for when, in the course of a react heirarchy you need to append a component outside of the current render tree. The canonical example of this pattern is overlays or modals that need to be appended to the document body. 
 
-Simply put This is the React equivalent to  jquery's `appendTo` (`$('node').appendTo('body')`)
+Simply put this sort of like the React equivalent to  jquery's `appendTo` (`$('node').appendTo('body')`)
 
 ### `new Layer(container, renderFn)`
 
-The Layer object takes two constructor arguments `container` which is a DOM node that the layer will be mounted too,such as the `body`, and `render`, a function that, when called, returns the ReactElements to render into the container
+The Layer object takes two arguments: a `container`, which is a DOM node that the layer will be mounted too (such as the `document.body`), and `render`, a function that, when called, returns a `ReactElement` to render into the container
 
 ### `Layer.render()`
 
@@ -59,6 +59,53 @@ function alert(message, callback) {
 }
 
 alert('hello there!')
+```
 
+
+If you want to create a component that represents the layer you can do that with a fairly simple Higher Order Component. The below example will tie the lifecycle of the `Layer` with the component that creates it. You can just provide a render method and the HOC will ensure that it is created and rendered at the right time. 
+
+```jsx
+
+let createLayeredComponent = render => class extends React.Component {
+
+  static propTypes = {
+    container: React.PropTypes.any
+  }
+
+  componentWillUnmount () {
+    this._layer.destroy()
+    this._layer = null
+  }
+
+  componentDidUpdate() {
+    this._renderOverlay();
+  }
+
+  componentDidMount() {
+    this._renderOverlay();
+  }
+
+  _renderOverlay() {
+    if (!this._layer)
+      this._layer = new Layer(this.props.container || document.body, () => this._child)
+
+    this._layer.render()
+  }
+
+  render() {
+    this._child = render(this.props) //create the elements in render(), otherwise Owner can be lost
+    return null;
+  }
+}
+
+// and In use....
+
+var LayeredComponent = createLayeredComponent(function(props){
+  return (
+    <MyComponentIWantRenderedInALayer {...props}>
+      {props.children}
+    </MyComponentIWantRenderedInALayer>
+  )
+})
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "react-layer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple abstraction for creating and managing new render trees",
   "author": {
     "name": "Jason Quense",
@@ -22,7 +22,7 @@
     "test": "karma start --single-run"
   },
   "peerDependencies": {
-    "react": "^0.12.2"
+    "react": ">=0.12.2"
   },
   "devDependencies": {
     "babel": "^4.7.2",
