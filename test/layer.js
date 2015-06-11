@@ -16,7 +16,7 @@ describe('React Layer', ()=>{
   it('should create mount point', ()=>{
     layer._createMountPoint()
 
-    document.body.children[document.body.children.length -1]
+    document.body.children[document.body.children.length - 1]
       .should.equal(layer._mountPoint)
   })
 
@@ -33,7 +33,14 @@ describe('React Layer', ()=>{
 
     contains(document.body, layer._mountPoint).should.equal(true)
   })
-  
+
+  it('should return an instance', ()=> {
+    var instance = layer.render()
+
+    console.log(instance)
+    ; (!!instance).should.equal(true)
+  })
+
   it('should destroy layer', ()=>{
     layer.render()
     var mount = layer._mountPoint
@@ -41,7 +48,7 @@ describe('React Layer', ()=>{
     layer.destroy()
 
     document.querySelectorAll('.test').length.should.equal(0);
-    
+
     contains(document.body, mount).should.equal(false);
 
     (layer._mountPoint === null).should.equal(true)

@@ -14,7 +14,7 @@ module.exports = class Layer {
 
     var child = this._render()
 
-    React.render(child, this._mountPoint, cb);
+    return React.render(child, this._mountPoint, cb);
   }
 
   unmount() {
