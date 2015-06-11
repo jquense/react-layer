@@ -1,6 +1,6 @@
 {
   "name": "react-layer",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Simple abstraction for creating and managing new render trees",
   "author": {
     "name": "Jason Quense",
