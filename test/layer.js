@@ -1,4 +1,5 @@
 var React = require('react')
+var ReactDOM = require('react-dom')
 var Layer = require('../src')
 var contains = require('dom-helpers/query/contains')
 
@@ -10,7 +11,8 @@ describe('React Layer', ()=>{
   })
 
   afterEach(()=>{
-    React.unmountComponentAtNode(layer._mountPoint)
+    if(layer._mountPoint)
+      ReactDOM.unmountComponentAtNode(layer._mountPoint)
   })
 
   it('should create mount point', ()=>{
@@ -37,8 +39,8 @@ describe('React Layer', ()=>{
   it('should return an instance', ()=> {
     var instance = layer.render()
 
-    console.log(instance)
-    ; (!!instance).should.equal(true)
+    console.log(instance);
+    (!!instance).should.equal(true)
   })
 
   it('should destroy layer', ()=>{

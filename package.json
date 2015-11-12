@@ -1,6 +1,6 @@
 {
   "name": "react-layer",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Simple abstraction for creating and managing new render trees",
   "author": {
     "name": "Jason Quense",
@@ -22,11 +22,14 @@
     "test": "karma start --single-run"
   },
   "peerDependencies": {
-    "react": ">=0.12.2"
+    "react": ">=0.14.2",
+    "react-dom": ">=0.14.2"
   },
   "devDependencies": {
-    "babel": "^4.7.2",
-    "babel-loader": "^4.0.0",
+    "babel-core": "^6.1.4",
+    "babel-loader": "^6.1.0",
+    "babel-preset-es2015": "^6.1.4",
+    "babel-preset-react": "^6.1.4",
     "chai": "^1.10.0",
     "chai-as-promised": "^4.1.1",
     "css-loader": "^0.9.1",
@@ -46,7 +49,8 @@
     "less-loader": "^2.0.0",
     "mocha": "~1.21.4",
     "phantomjs": "~1.9.10",
-    "react": "^0.12.2",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
     "react-hot-loader": "^1.1.7",
     "rimraf": "^2.2.8",
     "sinon-chai": "^2.6.0",
