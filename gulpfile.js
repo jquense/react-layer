@@ -13,8 +13,6 @@ gulp.task('clean', function(cb){
   rimraf('./lib', cb);
 })
 
-
-
 gulp.task('transpile', ['clean'], function(){
 
   return gulp.src(['./src/**/*.jsx', './src/**/*.js'])
@@ -34,7 +32,7 @@ gulp.task('dev', function() {
     stats: { colors: true }
   })
   .listen(8080, 'localhost', function (err, result) {
-    if (err) 
+    if (err)
       return console.log(err);
     
     console.log('Listening at localhost:8080');

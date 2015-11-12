@@ -18,9 +18,11 @@ Simply put this sort of like the React equivalent to  jquery's `appendTo` (`$('n
 
 The Layer object takes two arguments: a `container`, which is a DOM node that the layer will be mounted too (such as the `document.body`), and `render`, a function that, when called, returns a `ReactElement` to render into the container
 
-### `Layer.render()`
+### `Layer.render(cb, parentComponent)`
 
 Mounts and Renders the return value of the function provided in the constructor (`renderFn`) to the container
+
+Takes two optional arguments: `cb`, a callback that will be called after the layer has been rendered, and a `parentComponent`, which is a React Component that is the conceptual parent of the layer. If `parentComponent` is provided, its React context will be passed along to the layer.
 
 ### `Layer.unmount()`
 

@@ -1,4 +1,5 @@
 var React = require('react')
+var ReactDOM = require('react-dom')
 var Layer = require('../src')
 var contains = require('dom-helpers/query/contains')
 
@@ -10,7 +11,8 @@ describe('React Layer', ()=>{
   })
 
   afterEach(()=>{
-    React.unmountComponentAtNode(layer._mountPoint)
+    if(layer._mountPoint)
+      ReactDOM.unmountComponentAtNode(layer._mountPoint)
   })
 
   it('should create mount point', ()=>{
@@ -37,8 +39,8 @@ describe('React Layer', ()=>{
   it('should return an instance', ()=> {
     var instance = layer.render()
 
-    console.log(instance)
-    ; (!!instance).should.equal(true)
+    console.log(instance);
+    (!!instance).should.equal(true)
   })
 
   it('should destroy layer', ()=>{
@@ -52,5 +54,53 @@ describe('React Layer', ()=>{
     contains(document.body, mount).should.equal(false);
 
     (layer._mountPoint === null).should.equal(true)
+  })
+
+  it('should pass parent context to layer', ()=> {
+    const ParentWithContext = React.createClass({
+      childContextTypes: {
+        test: React.PropTypes.string
+      },
+      getChildContext() {
+        return {test: 'contextTest'}
+      },
+      componentDidMount() {
+        this.layer = new Layer(this.props.layerContainer, ()=> <ChildUsingContext />);
+        this.layer.render(null, this);
+      },
+      componentWillUnmount() {
+        this.layer.destroy();
+      },
+      render() {
+        return <div className="parent" />;
+      }
+    });
+
+    const ChildUsingContext = React.createClass({
+      contextTypes: {
+        test: React.PropTypes.string
+      },
+      render() {
+        return <div className="test">{this.context.test || "no context"}</div>;
+      }
+    });
+
+    const parentContainer = document.createElement('div');
+    parentContainer.setAttribute('id', 'parentContainer');
+    document.body.appendChild(parentContainer);
+
+    const layerContainer = document.createElement('div');
+    parentContainer.setAttribute('id', 'layerContainer');
+    document.body.appendChild(layerContainer);
+
+    ReactDOM.render(<ParentWithContext layerContainer={layerContainer}/>, parentContainer);
+
+    const layerEls = document.querySelectorAll('.test');
+    layerEls.length.should.equal(1);
+    layerEls[0].innerText.should.equal('contextTest');
+
+    ReactDOM.unmountComponentAtNode(parentContainer);
+    document.body.removeChild(parentContainer);
+    document.body.removeChild(layerContainer);
   })
 })
